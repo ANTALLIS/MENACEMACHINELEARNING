@@ -54,36 +54,52 @@ def checkWinningMove(game_board):
         
         j = game_board
         for i in winning_pos:
-                if j[i[0]] == j[i[1]] == j[i[2]] and j[i[0]] != "-":
+                if j[i[0]] != "-" and j[i[0]] == j[i[1]] == j[i[2]]:
                         return True
         return False
         
-def checkUniqueMove(game_board):s
+def checkUniqueMove(game_board):
         # Returns -1 if the move is unique, otherwise returns the index in the aray
         # rotations
-        pass
+        test_board = game_board
+        k = 0
+        for i in boxes:
+        	for j in range(4):# Checking each reflection and rotation
+        		for l in range(2):
+        			if test_board == i[0]:
+        				return k
+        			test_board = reflectBoard_y(test_board)
+        		test_board = rotateBoard(test_board)
+        	k += 1
+        return -1 
+        	
 
 def menacePlayMove(game_board, move_num):
-        # Returns a new board
-        boxes_used = []
+        # Returns a new board with a move randomly chosen from a matchbox
         new_board = game_board
-        unique_index = checkUniqueMove()
+        unique_index = checkUniqueMove(game_board)
         if unique_index == -1:
+        		# If the box doesn't exist then create it
                 beads = {}
+                for i in ["0", "1", "2", "3", "4", "5", "6", "7", "8"]:
+                	beads[i] = move_num%2 + 1 # Adjust the number of beads for the move
                 boxes.append([game_board, beads])
                 unique_index = len(boxes)
                 
         boxes_used.append(unique_index)
         
+        # TODO: Play move
+        
+def trainMenace(mode, first):
+	game_board = ["-"]*9
+	if mode == 0:# Against Random
+		
+	elif mode == 1:# Against Optimal
+	
+	elif mode == 2:# Against Human
+	
+	elif mode == 3:# Against Itself
 
-"""
-def generateBox():
-        # Creates the matchboxes
-        new_Boxes = []
-"""
-
-f = open("MENACE_LOG.txt", "w")
-move_num = 1
 
 def printBoard(j):
     print(j[6] + "|" + j[7] + "|" + j[8])
@@ -110,9 +126,9 @@ def main():
     printBoard(game_board)
     print("\n")
 
-    f.close()
-
-        
+move_num = 4
+f = open("MENACE_LOG.txt", "w")        
 game_board = ["-"]*9
 boxes_used = []
 boxes = [[["-", "-", "-", "-", "-", "-", "-", "-", "-"], {"0":4, "1":4, "2":4, "3":4, "4":4, "5":4, "6":4, "7":4, "8":4}]]
+f.close()
