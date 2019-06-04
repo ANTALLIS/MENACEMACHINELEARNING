@@ -166,7 +166,7 @@ def main():# Main game loop (?)
     printBoard(game_board)
     print("\n")
 
-move_num = 4# TODO: Replace with automatic detection of end of game
+move_counter = 0 #Number of turns since start of game (+1 for every two player turn)
 WIN_REWARD = 3
 LOSS_PENALTY = -1
 DRAW_REWARD = 0
